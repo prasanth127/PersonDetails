@@ -55,3 +55,43 @@ func getpersonByID(c *gin.Context) {
 	}
 	c.IndentedJSON(http.StatusNotFound, gin.H{"message": "album not found"})
 }
+
+
+
+
+
+
+package main
+
+import (
+	"net/http"
+
+	"github.com/gin-gonic/gin"
+)
+
+type person struct {
+	ID            string `json :"id"`
+	EMAIL         string `json :"email"`
+	FIRST_NAME    string `json :"firstname"`
+	LAST_NAME     string `json :"lastname"`
+	AVATAR        string `json :"avatar"`
+	SUPPORT       string `json : "support"`
+	TEXT          string  `json : "text"`
+}
+
+var person_details = []person{
+	{ID: "01", EMAIL:"george.bluth@reqres.in", FIRST_NAME: "George", LAST_NAME: "Bluth", AVATAR: "https://reqres.in/img/faces/1-image.jpg", SUPPORT: "url":"https://reqres.in/#support-heading", TEXT: "To keep ReqRes free, contributions towards server costs are appreciated!"}
+	
+}
+
+func main() {
+	router := gin.Default()
+	router.GET("/person_details", getperson_details)
+	
+
+	router.Run("localhost:8080")
+}
+func getperson_details(c *gin.Context) {
+	c.IndentedJSON(http.StatusOK, person_details)
+
+}
